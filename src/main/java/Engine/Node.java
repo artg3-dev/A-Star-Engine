@@ -8,6 +8,8 @@
 
 package Engine;
 
+import java.util.Objects;
+
 public class Node {
     private final int x;
     private final int y;
@@ -23,6 +25,11 @@ public class Node {
     
     public int getY() {
         return y;
+    }
+    
+    @Override
+    public int hashCode() {
+            return Objects.hash(x, y);
     }
     
     @Override

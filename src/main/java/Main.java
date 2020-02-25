@@ -24,7 +24,7 @@ public class Main {
     
         List<Node> result = runAStar(start);
         for (Node node : result) {
-//            System.out.println(node);
+            System.out.println(node);
         }
     }
 
@@ -51,7 +51,6 @@ public class Main {
             if (current.equals(end)) {
                 System.out.println("Done!");
                 // Do the reconstruct function here
-                System.out.println(cameFrom.containsKey(end) + " line 54");
                 List<Node> result = reconstruct(cameFrom);
                 return result;
             }
@@ -65,21 +64,17 @@ public class Main {
                 if (!closedSet.contains(neighbor)) {
                     double tempG = gScores.get(current) +
                             getDistance(current, neighbor);
-                    if (gScores.get(neighbor) != null) {
-                        if (!openSet.contains(neighbor) ||
-                                tempG <= gScores.get(neighbor)) {
-                            cameFrom.put(neighbor, current);
-                            gScores.put(neighbor, tempG);
-                            if (!openSet.contains(neighbor)) {
-                                openSet.add(neighbor);
-                            }
-                        }
-                    } else {
+                    if (!openSet.contains(neighbor) || gScores.get(neighbor) == null) {
                         cameFrom.put(neighbor, current);
                         gScores.put(neighbor, tempG);
-                        if (!openSet.contains(neighbor)) {
-                            openSet.add(neighbor);
-                        }
+                    } else if (tempG <= gScores.get(neighbor)) {
+                        cameFrom.put(neighbor, current);
+                        gScores.put(neighbor, tempG);
+                    }
+                    
+                    // Add neighbor to openSet if not already
+                    if (!openSet.contains(neighbor)) {
+                        openSet.add(neighbor);
                     }
                 }
             }
@@ -132,7 +127,6 @@ public class Main {
         Node current = end;
         while (cameFrom.containsKey(current)) {
             current = cameFrom.get(current);
-            System.out.println(current);
             r.add(current);
         }
         
