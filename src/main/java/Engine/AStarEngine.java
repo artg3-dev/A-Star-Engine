@@ -24,6 +24,9 @@ import java.util.Set;
 public class AStarEngine {
 	private final AStarFramework framework;
 	private final Set<AStarListener> listeners;
+	// TODO add ability to view information about the past search via public
+	//  methods and variables
+	
 	
 	public AStarEngine(AStarFramework framework) {
 		this.framework = framework;
