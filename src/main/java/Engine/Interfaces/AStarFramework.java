@@ -14,6 +14,8 @@ import Engine.Node;
 import java.util.List;
 
 public interface AStarFramework {
+	AbstractNode getStartNode();
+	AbstractNode getEndNode();
 	double getHeuristic(AbstractNode node);
 	double getF(AbstractNode node, double gScore);
 	double getDistance(AbstractNode node1, AbstractNode node2);
