@@ -11,7 +11,7 @@ package StandardUses.Standard2D;
 import Engine.Abstracts.AbstractNode;
 
 public class Node2D extends AbstractNode {
-	private final boolean isObstacle;
+	private boolean isObstacle;
 	
 	public Node2D(double x, double y, boolean isObstacle) {
 		super(x, y, 0);
@@ -28,6 +28,14 @@ public class Node2D extends AbstractNode {
 			Node2D compared = (Node2D) obj;
 			return this.x == compared.x && this.y == compared.y;
 		}
+	}
+	
+	public void setObstacle(boolean isObstacle) {
+		this.isObstacle = isObstacle;
+	}
+	
+	public boolean isObstacle() {
+		return isObstacle;
 	}
 	
 	@Override
