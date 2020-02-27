@@ -7,7 +7,12 @@
  License: GNU Lesser General Public License v3.0
  -----------------------------------------------------------------------------*/
 
+import Engine.AStarEngine;
+import StandardUses.Standard2D.Grid2D;
 import Engine.Node;
+import StandardUses.Standard2D.Framework2D;
+import StandardUses.Standard2D.Listener2D;
+import StandardUses.Standard2D.Node2D;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,12 +24,18 @@ public class Main {
     private final static Node end = new Node(5, 5);
 
     public static void main(String[] args) {
-        Node start = new Node(0, 0);
-    
-        List<Node> result = runAStar(start);
-        for (Node node : result) {
-            System.out.println(node);
-        }
+        Grid2D grid = new Grid2D(5, 5);
+        Node2D start = grid.getNode(0,0);
+        Node2D end = grid.getNode(4,4);
+        grid.setObstacle(2, 1, true);
+        grid.setObstacle(2, 1, true);
+        grid.setObstacle(2, 2, true);
+        grid.setObstacle(2, 3, true);
+        Framework2D framework = new Framework2D(grid, start, end);
+        Listener2D listener = new Listener2D();
+        AStarEngine engine = new AStarEngine(framework);
+        engine.addAStarListener(listener);
+        engine.search();
     }
 
     private static List<Node> runAStar(Node start) {
