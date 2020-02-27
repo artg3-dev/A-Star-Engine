@@ -24,18 +24,7 @@ public class Main {
     private final static Node end = new Node(5, 5);
 
     public static void main(String[] args) {
-        Grid2D grid = new Grid2D(5, 5);
-        Node2D start = grid.getNode(0,0);
-        Node2D end = grid.getNode(4,4);
-        grid.setObstacle(2, 1, true);
-        grid.setObstacle(2, 1, true);
-        grid.setObstacle(2, 2, true);
-        grid.setObstacle(2, 3, true);
-        Framework2D framework = new Framework2D(grid, start, end);
-        Listener2D listener = new Listener2D();
-        AStarEngine engine = new AStarEngine(framework);
-        engine.addAStarListener(listener);
-        engine.search();
+        Framework2D.runExample();
     }
 
     private static List<Node> runAStar(Node start) {
