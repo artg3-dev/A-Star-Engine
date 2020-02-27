@@ -9,7 +9,6 @@
 
 package Engine;
 
-import Engine.Abstracts.AbstractNode;
 import Engine.Interfaces.AStarFramework;
 import Engine.Interfaces.AStarListener;
 
@@ -21,50 +20,50 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class AStarEngine {
-	private final AStarFramework framework;
-	private final Set<AStarListener> listeners;
-	private List<AbstractNode> previousSolution;
+public class AStarEngine <T>{
+	private final AStarFramework<T> framework;
+	private final Set<AStarListener<T>> listeners;
+	private List<T> previousSolution;
 	// TODO add ability to view information about the past search via public
 	//  methods and variables
 	
 	
-	public AStarEngine(AStarFramework framework) {
+	public AStarEngine(AStarFramework<T> framework) {
 		this.framework = framework;
-		this.listeners = new HashSet();
+		this.listeners = new HashSet<AStarListener<T>>();
 		this.previousSolution = null;
 	}
 	
-	public void addAStarListener(AStarListener listener) {
+	public void addAStarListener(AStarListener<T> listener) {
 		listeners.add(listener);
 	}
 	
-	public List<AbstractNode> getPreviousSolution (){
+	public List<T> getPreviousSolution (){
 		return previousSolution;
 	}
 	
 	public void search() {
-		AbstractNode start = framework.getStartNode();
-		AbstractNode end = framework.getEndNode();
-		List<AbstractNode> openSet = new LinkedList();
-		List<AbstractNode> closedSet = new ArrayList();
-		Map<AbstractNode, Double> gScores = new HashMap();
-		Map<AbstractNode, AbstractNode> cameFrom = new HashMap();
+		T start = framework.getStartNode();
+		T end = framework.getEndNode();
+		List<T> openSet = new LinkedList<T>();
+		List<T> closedSet = new ArrayList<T>();
+		Map<T, Double> gScores = new HashMap<T, Double>();
+		Map<T, T> cameFrom = new HashMap<T, T>();
 		openSet.add(start);
 		gScores.put(start, 0.0);
 		
 		/*
 		 * Setup action
 		 */
-		for (AStarListener listener : listeners) {
+		for (AStarListener<T> listener : listeners) {
 			listener.setupAction(openSet);
 		}
 
 		// Loops while there are Nodes in openSet
 		while (!openSet.isEmpty()) {
-			// Current = the AbstractNode with the lowest fScore in openSet
-			AbstractNode current = null;
-			for (AbstractNode i : openSet) {
+			// Current = the node with the lowest fScore in openSet
+			T current = null;
+			for (T i : openSet) {
 				if (current == null || framework.getF(i, gScores.get(i)) <
 						framework.getF(current, gScores.get(current))) {
 					current = i;
@@ -79,7 +78,7 @@ public class AStarEngine {
 				/*
 				 * Finished action
 				 */
-				for (AStarListener listener : listeners) {
+				for (AStarListener<T> listener : listeners) {
 					listener.searchCompleteAction(previousSolution);
 				}
 				
@@ -94,12 +93,12 @@ public class AStarEngine {
 			/*
 			 * Current Update Action
 			 */
-			for (AStarListener listener : listeners) {
+			for (AStarListener<T> listener : listeners) {
 				listener.updatedCurrentNodeAction(openSet, closedSet, current);
 			}
 			
 			// For each neighbor of current
-			for (AbstractNode neighbor : framework.getNeighbors(current)) {
+			for (T neighbor : framework.getNeighbors(current)) {
 				if (!closedSet.contains(neighbor)) {
 					double tempG = gScores.get(current) +
 							framework.getDistance(current, neighbor);
@@ -124,16 +123,16 @@ public class AStarEngine {
 		/*
 		 * No Result action
 		 */
-		for (AStarListener listener : listeners) {
+		for (AStarListener<T> listener : listeners) {
 			listener.noResultAction();
 		}
 	}
 	
-	private static List<AbstractNode> reconstruct(
-			Map<AbstractNode, AbstractNode> cameFrom, AbstractNode end) {
-		List<AbstractNode> r = new LinkedList();
+	private List<T> reconstruct(
+			Map<T, T> cameFrom, T end) {
+		List<T> r = new LinkedList();
 		r.add(end);
-		AbstractNode current = end;
+		T current = end;
 		while (cameFrom.containsKey(current)) {
 			current = cameFrom.get(current);
 			r.add(0, current);

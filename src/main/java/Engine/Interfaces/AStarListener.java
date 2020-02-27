@@ -12,11 +12,11 @@ import Engine.Abstracts.AbstractNode;
 
 import java.util.List;
 
-public interface AStarListener {
-	void setupAction(List<AbstractNode> openSet);
-	void updatedCurrentNodeAction(List<AbstractNode> openSet,
-	                              List<AbstractNode> closedSet,
-	                              AbstractNode current);
-	void searchCompleteAction(List<AbstractNode> optimalPath);
+public interface AStarListener<T> {
+	void setupAction(List<T> openSet);
+	void updatedCurrentNodeAction(List<T> openSet,
+	                              List<T> closedSet,
+	                              T current);
+	void searchCompleteAction(List<T> optimalPath);
 	void noResultAction();
 }
