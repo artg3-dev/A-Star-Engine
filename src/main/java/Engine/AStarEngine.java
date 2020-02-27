@@ -24,6 +24,7 @@ import java.util.Set;
 public class AStarEngine {
 	private final AStarFramework framework;
 	private final Set<AStarListener> listeners;
+	private List<AbstractNode> previousSolution;
 	// TODO add ability to view information about the past search via public
 	//  methods and variables
 	
@@ -31,10 +32,15 @@ public class AStarEngine {
 	public AStarEngine(AStarFramework framework) {
 		this.framework = framework;
 		this.listeners = new HashSet();
+		this.previousSolution = null;
 	}
 	
 	public void addAStarListener(AStarListener listener) {
 		listeners.add(listener);
+	}
+	
+	public List<AbstractNode> getPreviousSolution (){
+		return previousSolution;
 	}
 	
 	public void search() {
@@ -68,13 +74,13 @@ public class AStarEngine {
 			// If the end has been reached
 			if (current.equals(end)) {
 				// Do the reconstruct function here
-				List<AbstractNode> result = reconstruct(cameFrom, end);
+				previousSolution = reconstruct(cameFrom, end);
 				
 				/*
 				 * Finished action
 				 */
 				for (AStarListener listener : listeners) {
-					listener.searchCompleteAction(result);
+					listener.searchCompleteAction(previousSolution);
 				}
 				
 				// End the search
