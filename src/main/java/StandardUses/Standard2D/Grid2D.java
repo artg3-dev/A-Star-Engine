@@ -18,7 +18,7 @@ public class Grid2D {
 		this.grid = new Node2D[width][height];
 		this.width = width;
 		this.height = height;
-		for (int i = 0; i < width; i ++) {
+		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				grid[i][j] = new Node2D(i, j, false);
 			}
@@ -31,5 +31,15 @@ public class Grid2D {
 	
 	public void setObstacle(int x, int y, boolean isObstacle) {
 		grid[x][y].setObstacle(isObstacle);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Grid: ");
+		sb.append(width);
+		sb.append("x");
+		sb.append(height);
+		return sb.toString();
 	}
 }
