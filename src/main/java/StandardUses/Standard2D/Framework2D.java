@@ -59,6 +59,7 @@ public class Framework2D implements AStarFramework<Node2D> {
 	
 	@Override
 	public List<Node2D> getNeighbors(Node2D node) {
+		// TODO remove ability for neighbor to be diagonal through two obstacles
 		List<Node2D> neighbors = new ArrayList();
 		double x = node.getX();
 		double y = node.getY();
@@ -86,6 +87,7 @@ public class Framework2D implements AStarFramework<Node2D> {
 		Node2D start = grid.getNode(0, 0);
 		Node2D end = grid.getNode(4, 4);
 		grid.setObstacle(2, 0, true);
+		// grid.setObstacle(2, 1, true);
 		grid.setObstacle(2, 2, true);
 		grid.setObstacle(2, 3, true);
 		grid.setObstacle(2, 4, true);
