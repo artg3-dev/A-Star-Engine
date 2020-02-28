@@ -44,9 +44,15 @@ public class DrawingAStarListener implements AStarListener<Node2D> {
 	@Override
 	public void searchCompleteAction(List<Node2D> optimalPath) {
 		grid.clearMarkings();
-		for (Node2D n : optimalPath) {
-			grid.markCell(n, Color.gray);
+		for (int i = 0; i < optimalPath.size(); i ++) {
+			grid.markCell(optimalPath.get(i), Color.gray);
+			i ++;
+			try {
+				grid.markCell(optimalPath.get(i), Color.white);
+			} catch (Exception e) {
+			}
 		}
+
 		canvas.repaint();
 	}
 	
