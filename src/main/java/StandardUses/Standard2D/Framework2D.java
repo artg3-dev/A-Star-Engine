@@ -8,7 +8,6 @@
 
 package StandardUses.Standard2D;
 
-import Engine.AStarEngine;
 import Engine.Interfaces.AStarFramework;
 
 import java.util.ArrayList;
@@ -17,13 +16,16 @@ import java.util.List;
 public class Framework2D implements AStarFramework<Node2D> {
 	private final Grid2D grid;
 	private final Node2D endNode, startNode;
+	private final boolean diagonalsAllowed;
 	
 	public Framework2D(Grid2D grid,
 	                   Node2D startNode,
-	                   Node2D endNode) {
+	                   Node2D endNode,
+	                   boolean diagonalsAllowed) {
 		this.grid = grid;
 		this.startNode = startNode;
 		this.endNode = endNode;
+		this.diagonalsAllowed = diagonalsAllowed;
 	}
 	
 	@Override
@@ -61,17 +63,26 @@ public class Framework2D implements AStarFramework<Node2D> {
 	public List<Node2D> getNeighbors(Node2D node) {
 		//  TODO remove ability for neighbor to be diagonal through two obstacles
 		List<Node2D> neighbors = new ArrayList();
-		double x = node.getX();
-		double y = node.getY();
+		int x = node.x;
+		int y = node.y;
 		for (int i = - 1; i <= 1; i++) {
 			for (int j = - 1; j <= 1; j++) {
-				int neighborX = (int) x + i;
-				int neighborY = (int) y + j;
+				int neighborX = x + i;
+				int neighborY = y + j;
+				// Checks if neighbor is inbounds and != current target ('node')
 				if ((neighborX >= 0 && neighborY >= 0) &&
 						(neighborX < grid.width && neighborY < grid.height) &&
 						! (neighborX == x && neighborY == y)) {
 					Node2D neighbor = grid.getNode(neighborX, neighborY);
-					if (! neighbor.isObstacle()) {
+					
+					// Checks adjacent neighbors only
+					if (! neighbor.isObstacle() && (i == 0 || j == 0)) {
+						neighbors.add(neighbor);
+					}
+					
+					// Checks diagonals if diagonals are allowed
+					else if (diagonalsAllowed && ! neighbor.isObstacle() &&
+							diagonalValid(node, neighbor)) {
 						neighbors.add(neighbor);
 					}
 				}
@@ -81,5 +92,11 @@ public class Framework2D implements AStarFramework<Node2D> {
 		return neighbors;
 	}
 	
+	private boolean diagonalValid(Node2D node, Node2D neighbor) {
+		int xDif = neighbor.x - node.x;
+		int yDif = neighbor.y - node.y;
+		Node2D toCheck1 = grid.getNode(node.x, node.y + yDif);
+		Node2D toCheck2 = grid.getNode(node.x + xDif, node.y);
+		return ! (toCheck1.isObstacle() && toCheck2.isObstacle());
 	}
 }
