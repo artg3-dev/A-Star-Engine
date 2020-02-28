@@ -42,7 +42,7 @@ public class AStarEngine <T>{
 		return previousSolution;
 	}
 	
-	public void search() {
+	public List<T> search() {
 		T start = framework.getStartNode();
 		T end = framework.getEndNode();
 		List<T> openSet = new LinkedList<T>();
@@ -83,7 +83,7 @@ public class AStarEngine <T>{
 				}
 				
 				// End the search
-				return;
+				return previousSolution;
 			}
 			
 			// Remove current from openSet and evaluate each neighbor
@@ -126,6 +126,8 @@ public class AStarEngine <T>{
 		for (AStarListener<T> listener : listeners) {
 			listener.noResultAction();
 		}
+		this.previousSolution = null;
+		return null;
 	}
 	
 	private List<T> reconstruct(
