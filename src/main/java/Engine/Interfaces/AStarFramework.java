@@ -9,15 +9,14 @@
 package Engine.Interfaces;
 
 import Engine.Abstracts.AbstractNode;
-import Engine.Node;
 
 import java.util.List;
 
-public interface AStarFramework {
-	AbstractNode getStartNode();
-	AbstractNode getEndNode();
-	double getHeuristic(AbstractNode node);
-	double getF(AbstractNode node, double gScore);
-	double getDistance(AbstractNode node1, AbstractNode node2);
-	List<AbstractNode> getNeighbors(AbstractNode node);
+public interface AStarFramework<T>{
+	T getStartNode();
+	T getEndNode();
+	double getHeuristic(T node);
+	double getF(T node, double gScore);
+	double getDistance(T node1, T node2);
+	List<T> getNeighbors(T node);
 }
