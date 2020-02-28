@@ -21,7 +21,7 @@ public class DrawingMouseListener
 	private final DrawingBoard canvas;
 	private final PaintGrid grid;
 	private Node2D currentNode;
-	private boolean currentState;
+	private boolean dragState;
 	
 	public DrawingMouseListener(DrawingBoard canvas, PaintGrid grid) {
 		this.canvas = canvas;
@@ -35,14 +35,11 @@ public class DrawingMouseListener
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if (e.isControlDown()) {
-			System.out.println("control down");
-		}
+		dragState = e.getButton() == MouseEvent.BUTTON1;
 		if (canvas.getMousePosition() != null) {
 			currentNode = grid.getScaledNode(e.getPoint());
-			currentState = currentNode.isObstacle();
 			if (currentNode.equals(currentNode)) {
-				grid.setObstacle(currentNode, ! currentState);
+				grid.setObstacle(currentNode,  dragState);
 				canvas.repaint();
 			}
 		}
@@ -69,7 +66,7 @@ public class DrawingMouseListener
 			try {
 				Node2D node = grid.getScaledNode(e.getPoint());
 				if (! node.equals(currentNode)) {
-					grid.setObstacle(node, ! currentState);
+					grid.setObstacle(node,  dragState);
 					currentNode = node;
 					canvas.repaint();
 				}
