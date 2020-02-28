@@ -30,13 +30,19 @@ public class DrawingBoard extends JPanel  {
 	private final int scaleFactor;
 	private final int scaledWidth, scaledHeight;
 	private int currentMode;
+	private boolean showGrid;
 	
-	public DrawingBoard(int gridWidth, int gridHeight) {
+	public DrawingBoard(int gridWidth, int gridHeight, boolean showGrid) {
 		this.scaleFactor = 25;
-		this.grid = new PaintGrid(gridWidth, gridHeight, scaleFactor);
+		this.grid = new PaintGrid(gridWidth, gridHeight, scaleFactor, showGrid);
 		this.scaledWidth = grid.width * scaleFactor;
 		this.scaledHeight = grid.height * scaleFactor;
+		this.showGrid = showGrid;
 		setup();
+	}
+	
+	public DrawingBoard(int gridWidth, int gridHeight) {
+		this(gridWidth, gridHeight, false);
 	}
 	
 	public DrawingBoard(int gridWidth, int gridHeight, int scaleFactor) {
@@ -48,7 +54,8 @@ public class DrawingBoard extends JPanel  {
 	}
 	
 	public void reset() {
-		this.grid = new PaintGrid(grid.width, grid.height, scaleFactor);
+		this.grid = new PaintGrid(
+				grid.width, grid.height, scaleFactor, showGrid);
 		currentMode = OBSTACLE_MODE;
 		repaint();
 	}

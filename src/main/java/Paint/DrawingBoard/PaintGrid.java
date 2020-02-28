@@ -22,13 +22,20 @@ public class PaintGrid extends Grid2D implements Paintable {
 	private final int scaleFactor;
 	private final Map<Node2D, Color> markedNodes;
 	private Node2D start, end;
+	private boolean showGrid;
 	
-	public PaintGrid(int width, int height, int scaleFactor) {
+	public PaintGrid(int width, int height, int scaleFactor,
+	                 boolean showGrid) {
 		super(width, height);
 		this.markedNodes = new HashMap();
 		this.start = getNode(0, 0);
 		this.end = getNode(width - 1, height - 1);
 		this.scaleFactor = scaleFactor;
+		this.showGrid = showGrid;
+	}
+	
+	public PaintGrid(int width, int height, int scaleFactor) {
+		this(width, height, scaleFactor, true);
 	}
 	
 	public Node2D getStart() {
@@ -40,13 +47,13 @@ public class PaintGrid extends Grid2D implements Paintable {
 	}
 	
 	public void setStart(Node2D start) {
-		if (!start.isObstacle()) {
+		if (! start.isObstacle()) {
 			this.start = start;
 		}
 	}
 	
 	public void setEnd(Node2D end) {
-		if (!end.isObstacle()) {
+		if (! end.isObstacle()) {
 			this.end = end;
 		}
 	}
@@ -76,10 +83,10 @@ public class PaintGrid extends Grid2D implements Paintable {
 	private void fillCell(Node2D node, Graphics g, Color c) {
 		int x = node.x * scaleFactor;
 		int y = node.y * scaleFactor;
-		fillCell(x, y, g, c);
+		paintCell(x, y, g, c);
 	}
 	
-	private void fillCell(int x, int y, Graphics g, Color c) {
+	private void paintCell(int x, int y, Graphics g, Color c) {
 		g.setColor(c);
 		g.fillRect(x + 1, y + 1,
 				scaleFactor - 1, scaleFactor - 1);
@@ -87,7 +94,7 @@ public class PaintGrid extends Grid2D implements Paintable {
 	
 	@Override
 	public void setObstacle(int x, int y, boolean isObstacle) {
-		if (!getNode(x, y).equals(start) && !getNode(x, y).equals(end)) {
+		if (! getNode(x, y).equals(start) && ! getNode(x, y).equals(end)) {
 			super.setObstacle(x, y, isObstacle);
 		}
 	}
@@ -99,8 +106,8 @@ public class PaintGrid extends Grid2D implements Paintable {
 			for (int y = 0; y < height * scaleFactor; y += scaleFactor) {
 				if (getScaledNode(x, y).isObstacle()) {
 					g.drawRect(x, y, scaleFactor, scaleFactor);
-					fillCell(x, y, g, Color.black);
-				} else {
+					paintCell(x, y, g, Color.black);
+				} else if (showGrid){
 					g.drawRect(x, y, scaleFactor, scaleFactor);
 				}
 			}
