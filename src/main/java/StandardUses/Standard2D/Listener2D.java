@@ -8,7 +8,6 @@
 
 package StandardUses.Standard2D;
 
-import Engine.Abstracts.AbstractNode;
 import Engine.Interfaces.AStarListener;
 
 import java.util.List;
