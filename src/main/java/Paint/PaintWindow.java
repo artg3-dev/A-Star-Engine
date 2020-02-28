@@ -35,7 +35,7 @@ public class PaintWindow implements Runnable{
 	private void createComponents(Container container) {
 		container.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		DrawingUI ui = new DrawingUI(50, 50);
+		DrawingUI ui = new DrawingUI(100, 100, 10);
 		container.add(ui, c);
 	}
 }

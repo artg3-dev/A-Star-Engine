@@ -27,13 +27,17 @@ public class DrawingUI extends JPanel implements ActionListener {
 	private final DrawingBoard canvas;
 	private final JButton searchButton, resetButton;
 	
-	public DrawingUI(int gridWidth, int gridHeight) {
-		this.canvas = new DrawingBoard(gridWidth, gridHeight);
+	public DrawingUI(int gridWidth, int gridHeight, int scaleFactor) {
+		this.canvas = new DrawingBoard(gridWidth, gridHeight, scaleFactor);
 		this.searchButton = new JButton("Search");
 		this.resetButton = new JButton("Reset");
 		searchButton.addActionListener(this);
 		resetButton.addActionListener(this);
 		layoutComponents();
+	}
+	
+	public DrawingUI (int gridWidth, int gridHeight) {
+		this(gridWidth, gridHeight, 25);
 	}
 	
 	private void layoutComponents() {

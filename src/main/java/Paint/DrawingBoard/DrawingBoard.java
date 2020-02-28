@@ -16,6 +16,7 @@ import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Paint;
@@ -32,8 +33,9 @@ public class DrawingBoard extends JPanel  {
 	private int currentMode;
 	private boolean showGrid;
 	
-	public DrawingBoard(int gridWidth, int gridHeight, boolean showGrid) {
-		this.scaleFactor = 25;
+	public DrawingBoard(int gridWidth, int gridHeight, int scaleFactor,
+	                    boolean showGrid) {
+		this.scaleFactor = scaleFactor;
 		this.grid = new PaintGrid(gridWidth, gridHeight, scaleFactor, showGrid);
 		this.scaledWidth = grid.width * scaleFactor;
 		this.scaledHeight = grid.height * scaleFactor;
@@ -41,16 +43,8 @@ public class DrawingBoard extends JPanel  {
 		setup();
 	}
 	
-	public DrawingBoard(int gridWidth, int gridHeight) {
-		this(gridWidth, gridHeight, false);
-	}
-	
 	public DrawingBoard(int gridWidth, int gridHeight, int scaleFactor) {
-		this.scaleFactor = scaleFactor;
-		this.grid = new PaintGrid(gridWidth, gridHeight, scaleFactor);
-		this.scaledWidth = grid.width * scaleFactor;
-		this.scaledHeight = grid.height * scaleFactor;
-		setup();
+		this(gridWidth, gridHeight, scaleFactor, false);
 	}
 	
 	public void reset() {
@@ -76,6 +70,7 @@ public class DrawingBoard extends JPanel  {
 	
 	private void setup() {
 		this.currentMode = 0;
+		setBackground(Color.darkGray);
 		DrawingMouseListener mouseListener =
 				new DrawingMouseListener(this);
 		addMouseListener(mouseListener);
