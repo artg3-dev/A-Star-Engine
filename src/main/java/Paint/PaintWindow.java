@@ -9,6 +9,7 @@
 package Paint;
 
 import Paint.DrawingBoard.DrawingBoard;
+import Paint.DrawingBoard.UI.DrawingUI;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -34,7 +35,7 @@ public class PaintWindow implements Runnable{
 	private void createComponents(Container container) {
 		container.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		DrawingBoard canvas = new DrawingBoard(20, 20);
-		container.add(canvas, c);
+		DrawingUI ui = new DrawingUI(20, 20);
+		container.add(ui, c);
 	}
 }

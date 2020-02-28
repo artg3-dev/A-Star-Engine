@@ -26,20 +26,28 @@ public class DrawingBoard extends JPanel  {
 	public final static int END_MODE = 2;
 	
 	private final PaintGrid grid;
-	private final int scaleFactor = 25;
+	private final int scaleFactor;
 	private final int scaledWidth, scaledHeight;
 	private int currentMode;
 	
 	public DrawingBoard(int gridWidth, int gridHeight) {
+		this.scaleFactor = 25;
 		this.grid = new PaintGrid(gridWidth, gridHeight, scaleFactor);
 		this.scaledWidth = grid.width * scaleFactor;
 		this.scaledHeight = grid.height * scaleFactor;
-		this.currentMode = 0;
-		DrawingMouseListener mouseListener =
-				new DrawingMouseListener(this, grid);
-		addMouseListener(mouseListener);
-		addMouseMotionListener(mouseListener);
-		addKeyboardActions();
+		setup();
+	}
+	
+	public DrawingBoard(int gridWidth, int gridHeight, int scaleFactor) {
+		this.scaleFactor = scaleFactor;
+		this.grid = new PaintGrid(gridWidth, gridHeight, scaleFactor);
+		this.scaledWidth = grid.width * scaleFactor;
+		this.scaledHeight = grid.height * scaleFactor;
+		setup();
+	}
+	
+	public PaintGrid getGrid() {
+		return grid;
 	}
 	
 	public int getCurrentMode() {
@@ -50,6 +58,15 @@ public class DrawingBoard extends JPanel  {
 		if (mode <= 2) {
 			this.currentMode = mode;
 		}
+	}
+	
+	private void setup() {
+		this.currentMode = 0;
+		DrawingMouseListener mouseListener =
+				new DrawingMouseListener(this, grid);
+		addMouseListener(mouseListener);
+		addMouseMotionListener(mouseListener);
+		addKeyboardActions();
 	}
 	
 	private void addKeyboardActions() {

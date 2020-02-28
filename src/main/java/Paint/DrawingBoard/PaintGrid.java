@@ -15,16 +15,28 @@ import StandardUses.Standard2D.Node2D;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PaintGrid extends Grid2D implements Paintable {
 	private final int scaleFactor;
+	private final Map<Node2D, Color> markedNodes;
 	private Node2D start, end;
 	
 	public PaintGrid(int width, int height, int scaleFactor) {
 		super(width, height);
+		this.markedNodes = new HashMap();
 		this.start = getNode(0, 0);
 		this.end = getNode(width - 1, height - 1);
 		this.scaleFactor = scaleFactor;
+	}
+	
+	public Node2D getStart() {
+		return start;
+	}
+	
+	public Node2D getEnd() {
+		return end;
 	}
 	
 	public void setStart(Node2D start) {
@@ -51,6 +63,20 @@ public class PaintGrid extends Grid2D implements Paintable {
 	
 	public void setObstacle(Node2D node, boolean isObstacle) {
 		setObstacle(node.x, node.y, isObstacle);
+	}
+	
+	public void markCell(Node2D node, Color c) {
+		markedNodes.put(node, c);
+	}
+	
+	public void clearMarkings() {
+		markedNodes.clear();
+	}
+	
+	private void fillCell(Node2D node, Graphics g, Color c) {
+		int x = node.x * scaleFactor;
+		int y = node.y * scaleFactor;
+		fillCell(x, y, g, c);
 	}
 	
 	private void fillCell(int x, int y, Graphics g, Color c) {
@@ -80,14 +106,12 @@ public class PaintGrid extends Grid2D implements Paintable {
 			}
 		}
 		
-		// Start
-		int startX = start.x * scaleFactor;
-		int startY = start.y * scaleFactor;
-		fillCell(startX, startY, g, Color.green);
+		for (Node2D node2D : markedNodes.keySet()) {
+			fillCell(node2D, g, markedNodes.get(node2D));
+		}
 		
-		// End
-		int endX = end.x * scaleFactor;
-		int endY = end.y * scaleFactor;
-		fillCell(endX, endY, g, Color.blue);
+		// Start & End
+		fillCell(start, g, Color.green);
+		fillCell(end, g, Color.blue);
 	}
 }
