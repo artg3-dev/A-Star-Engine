@@ -102,7 +102,8 @@ public class AStarEngine<T> {
 			
 			// Current Node Update Actions
 			for (AStarListener<T> listener : listeners) {
-				listener.updatedCurrentNodeAction(openSet, closedSet, current);
+				listener.updatedCurrentNodeAction(openSet, closedSet,
+						cameFrom, current);
 			}
 			
 			// For each neighbor of current

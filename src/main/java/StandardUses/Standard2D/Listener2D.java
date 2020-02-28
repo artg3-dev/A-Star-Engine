@@ -11,6 +11,7 @@ package StandardUses.Standard2D;
 import Engine.Interfaces.AStarListener;
 
 import java.util.List;
+import java.util.Map;
 
 public class Listener2D implements AStarListener<Node2D> {
 	public void setupAction(List<Node2D> openSet) {
@@ -19,6 +20,7 @@ public class Listener2D implements AStarListener<Node2D> {
 	
 	public void updatedCurrentNodeAction(List<Node2D> openSet,
 	                                     List<Node2D> closedSet,
+	                                     Map<Node2D, Node2D> cameFrom,
 	                                     Node2D current) {
 		System.out.println("New Current: " + current);
 	}

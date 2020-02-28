@@ -9,11 +9,13 @@
 package Engine.Interfaces;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AStarListener<T> {
 	void setupAction(List<T> openSet);
 	void updatedCurrentNodeAction(List<T> openSet,
 	                              List<T> closedSet,
+	                              Map<T, T> cameFrom,
 	                              T current);
 	void searchCompleteAction(List<T> optimalPath);
 	void noResultAction();
