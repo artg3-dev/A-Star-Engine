@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Set;
 
 // Todo add javadoc
+
+// Todo add tick - controlled search 
 public class AStarEngine<T> {
 	private final AStarFramework<T> framework;
 	private final Set<AStarListener<T>> listeners;
