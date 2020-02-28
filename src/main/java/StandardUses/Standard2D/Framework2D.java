@@ -12,6 +12,7 @@ import Engine.AStarEngine;
 import Engine.Abstracts.AbstractNode;
 import Engine.Interfaces.AStarFramework;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +93,7 @@ public class Framework2D implements AStarFramework<Node2D> {
 		grid.setObstacle(2, 4, true);
 		Framework2D framework = new Framework2D(grid, start, end);
 		Listener2D listener = new Listener2D();
-		AStarEngine engine = new AStarEngine(framework);
+		AStarEngine<Node2D> engine = new AStarEngine(framework);
 		engine.addAStarListener(listener);
 		
 		// Display explanation text
