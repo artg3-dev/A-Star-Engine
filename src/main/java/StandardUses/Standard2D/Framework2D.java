@@ -145,5 +145,8 @@ public class Framework2D implements AStarFramework<Node2D> {
 			System.out.println();
 		}
 		
+		// Run Analytics
+		engine.printAnalytics();
+		
 	}
 }
