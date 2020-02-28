@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Framework2D implements AStarFramework<Node2D> {
 	private final Grid2D grid;
-	private final Node2D endNode, startNode;
+	private Node2D endNode, startNode;
 	private final boolean diagonalsAllowed;
 	
 	public Framework2D(Grid2D grid,
@@ -26,6 +26,14 @@ public class Framework2D implements AStarFramework<Node2D> {
 		this.startNode = startNode;
 		this.endNode = endNode;
 		this.diagonalsAllowed = diagonalsAllowed;
+	}
+	
+	public void setStartNode(Node2D startNode) {
+		this.startNode = startNode;
+	}
+	
+	public void setEndNode(Node2D endNode) {
+		this.endNode = endNode;
 	}
 	
 	@Override

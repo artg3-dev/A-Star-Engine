@@ -7,12 +7,16 @@
  License: GNU Lesser General Public License v3.0
  -----------------------------------------------------------------------------*/
 
+import Paint.PaintWindow;
 import StandardUses.Examples;
 import StandardUses.Standard2D.Framework2D;
+
+import javax.swing.SwingUtilities;
 
 public class Main {
 
     public static void main(String[] args) {
-        Examples.run2DTextBasedExample();
+        PaintWindow gui = new PaintWindow();
+        SwingUtilities.invokeLater(gui);
     }
 }
