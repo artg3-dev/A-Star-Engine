@@ -7,11 +7,12 @@
  License: GNU Lesser General Public License v3.0
  -----------------------------------------------------------------------------*/
 
+import StandardUses.Examples;
 import StandardUses.Standard2D.Framework2D;
 
 public class Main {
 
     public static void main(String[] args) {
-        Framework2D.runExample();
+        Examples.run2DTextBasedExample();
     }
 }

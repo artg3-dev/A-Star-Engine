@@ -251,12 +251,12 @@ public class AStarEngine<T> {
 			sb.append(minutes);
 			sb.append(":");
 			sb.append(seconds);
-			sb.append(":");
+			sb.append(".");
 			sb.append(milliSeconds);
 			sb.append(" minutes");
 		} else {
 			sb.append(seconds);
-			sb.append(":");
+			sb.append(".");
 			sb.append(milliSeconds);
 			sb.append(" seconds");
 		}

@@ -10,7 +10,7 @@ package StandardUses.Standard2D;
 
 public class Grid2D {
 	private final Node2D[][] grid;
-	protected final int width, height;
+	public final int width, height;
 	
 	public Grid2D(int width, int height) {
 		this.grid = new Node2D[width][height];
