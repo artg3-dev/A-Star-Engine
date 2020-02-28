@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+// Todo add javadoc
 public class AStarEngine<T> {
 	private final AStarFramework<T> framework;
 	private final Set<AStarListener<T>> listeners;
