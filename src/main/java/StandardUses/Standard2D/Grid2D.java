@@ -8,8 +8,6 @@
 
 package StandardUses.Standard2D;
 
-import StandardUses.Standard2D.Node2D;
-
 public class Grid2D {
 	private final Node2D[][] grid;
 	protected final int width, height;
