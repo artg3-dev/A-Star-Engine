@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Paint;
 import java.awt.event.InputEvent;
 
 public class DrawingBoard extends JPanel  {
@@ -25,7 +26,7 @@ public class DrawingBoard extends JPanel  {
 	public final static int START_MODE = 1;
 	public final static int END_MODE = 2;
 	
-	private final PaintGrid grid;
+	private PaintGrid grid;
 	private final int scaleFactor;
 	private final int scaledWidth, scaledHeight;
 	private int currentMode;
@@ -46,6 +47,12 @@ public class DrawingBoard extends JPanel  {
 		setup();
 	}
 	
+	public void reset() {
+		this.grid = new PaintGrid(grid.width, grid.height, scaleFactor);
+		currentMode = OBSTACLE_MODE;
+		repaint();
+	}
+	
 	public PaintGrid getGrid() {
 		return grid;
 	}
@@ -63,7 +70,7 @@ public class DrawingBoard extends JPanel  {
 	private void setup() {
 		this.currentMode = 0;
 		DrawingMouseListener mouseListener =
-				new DrawingMouseListener(this, grid);
+				new DrawingMouseListener(this);
 		addMouseListener(mouseListener);
 		addMouseMotionListener(mouseListener);
 		addKeyboardActions();
