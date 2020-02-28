@@ -10,7 +10,6 @@ package Paint.DrawingBoard;
 
 import Paint.DrawingBoard.Actions.SetMode;
 import Paint.DrawingBoard.Listeners.DrawingMouseListener;
-import Paint.Engine.PaintGrid;
 import com.sun.glass.events.KeyEvent;
 
 import javax.swing.ActionMap;

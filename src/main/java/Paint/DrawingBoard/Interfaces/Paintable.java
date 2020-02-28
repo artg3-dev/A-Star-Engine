@@ -6,7 +6,7 @@
  License: GNU Lesser General Public License v3.0
  -----------------------------------------------------------------------------*/
 
-package Paint.Interfaces;
+package Paint.DrawingBoard.Interfaces;
 
 import java.awt.Graphics;
 

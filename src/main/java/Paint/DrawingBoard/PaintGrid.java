@@ -2,13 +2,13 @@
  @Author Art Garcia
  Copyright (c) 2/2020
  Project: AStarEngine
- Last Modified: 2/28/20, 11:50 AM
+ Last Modified: 2/28/20, 1:58 PM
  License: GNU Lesser General Public License v3.0
  -----------------------------------------------------------------------------*/
 
-package Paint.Engine;
+package Paint.DrawingBoard;
 
-import Paint.Interfaces.Paintable;
+import Paint.DrawingBoard.Interfaces.Paintable;
 import StandardUses.Standard2D.Grid2D;
 import StandardUses.Standard2D.Node2D;
 

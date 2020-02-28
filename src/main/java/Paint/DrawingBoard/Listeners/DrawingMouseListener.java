@@ -9,7 +9,7 @@
 package Paint.DrawingBoard.Listeners;
 
 import Paint.DrawingBoard.DrawingBoard;
-import Paint.Engine.PaintGrid;
+import Paint.DrawingBoard.PaintGrid;
 import StandardUses.Standard2D.Node2D;
 
 import java.awt.event.MouseEvent;
