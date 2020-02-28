@@ -9,10 +9,8 @@
 package StandardUses.Standard2D;
 
 import Engine.AStarEngine;
-import Engine.Abstracts.AbstractNode;
 import Engine.Interfaces.AStarFramework;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 

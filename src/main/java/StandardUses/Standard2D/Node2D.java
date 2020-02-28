@@ -8,8 +8,6 @@
 
 package StandardUses.Standard2D;
 
-import Engine.Abstracts.AbstractNode;
-
 import java.awt.Point;
 
 public class Node2D extends Point {

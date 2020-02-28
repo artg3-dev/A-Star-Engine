@@ -8,8 +8,6 @@
 
 package Engine.Interfaces;
 
-import Engine.Abstracts.AbstractNode;
-
 import java.util.List;
 
 public interface AStarListener<T> {
