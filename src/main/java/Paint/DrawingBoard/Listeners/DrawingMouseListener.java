@@ -35,13 +35,23 @@ public class DrawingMouseListener
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		dragState = e.getButton() == MouseEvent.BUTTON1;
-		if (canvas.getMousePosition() != null) {
-			currentNode = grid.getScaledNode(e.getPoint());
-			if (currentNode.equals(currentNode)) {
-				grid.setObstacle(currentNode,  dragState);
-				canvas.repaint();
+		currentNode = grid.getScaledNode(e.getPoint());
+		
+		if (canvas.getCurrentMode() == DrawingBoard.OBSTACLE_MODE) {
+			dragState = e.getButton() == MouseEvent.BUTTON1;
+			if (canvas.getMousePosition() != null) {
+				if (currentNode.equals(currentNode)) {
+					grid.setObstacle(currentNode, dragState);
+					canvas.repaint();
+				}
 			}
+		} else if (canvas.getCurrentMode() == DrawingBoard.START_MODE) {
+			grid.setStart(currentNode);
+			canvas.repaint();
+		}
+		 else if (canvas.getCurrentMode() == DrawingBoard.END_MODE) {
+		    grid.setEnd(currentNode);
+		    canvas.repaint();
 		}
 	}
 	
@@ -62,15 +72,17 @@ public class DrawingMouseListener
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if (canvas.getMousePosition() != null) {
-			try {
-				Node2D node = grid.getScaledNode(e.getPoint());
-				if (! node.equals(currentNode)) {
-					grid.setObstacle(node,  dragState);
-					currentNode = node;
-					canvas.repaint();
+		if (canvas.getCurrentMode() == DrawingBoard.OBSTACLE_MODE) {
+			if (canvas.getMousePosition() != null) {
+				try {
+					Node2D node = grid.getScaledNode(e.getPoint());
+					if (! node.equals(currentNode)) {
+						grid.setObstacle(node, dragState);
+						currentNode = node;
+						canvas.repaint();
+					}
+				} catch (Exception ex) {
 				}
-			} catch (Exception ex) {
 			}
 		}
 	}
