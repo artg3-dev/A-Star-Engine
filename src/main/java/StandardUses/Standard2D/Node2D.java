@@ -10,11 +10,13 @@ package StandardUses.Standard2D;
 
 import Engine.Abstracts.AbstractNode;
 
-public class Node2D extends AbstractNode {
+import java.awt.Point;
+
+public class Node2D extends Point {
 	private boolean isObstacle;
 	
-	public Node2D(double x, double y, boolean isObstacle) {
-		super(x, y, 0);
+	public Node2D(int x, int y, boolean isObstacle) {
+		super(x, y);
 		this.isObstacle = isObstacle;
 	}
 
